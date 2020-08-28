@@ -166,9 +166,9 @@
             	<li class="list-group-item bg-info text-white">
                 <h5 class="text-center">Categorías</h5>
             	</li>
-            	<a href="#" class="list-group-item list-group-item-action bg-light">Cras justo odio</a>
-            	<a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-            	<a href="#" class="list-group-item list-group-item-action bg-light">Morbi leo risus</a>
+            	<a href="#" class="list-group-item list-group-item-action bg-light">Tiempo Completo</a>
+            	<a href="#" class="list-group-item list-group-item-action">Medio Dia</a>
+            	<a href="#" class="list-group-item list-group-item-action bg-light">Nocturno</a>
             </div>
         	</div>
         </div>
