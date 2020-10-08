@@ -72,17 +72,17 @@
   <br>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card" style="border-width: 1px; border-style: solid; border-color: black;">
-          <div class="card-header gradient-brand" style="color: white;"><h5>{{ __('Verificación de Correo Electronico para: ') }} {{ Auth::user()->email }} </h5></div>
+      <div class="col-md-8 mt-5">
+        <div class="card shadow">
+          <div class="card-header bg-info text-white"><h6>{{ __('Verificación de correo eléctronico ') }} <strong> {{ Auth::user()->email }} </strong></h6></div>
           <div class="card-body">
             @if (session('resent'))
-              <div class="alert alert-success" role="alert">
+              <div class="alert alert-info" role="alert">
                 {{ __('Se ha enviado un nuevo enlace de verificación a su dirección de correo electrónico.') }}
               </div>
             @endif
-            <h5>{{ __('Antes de continuar, revise su correo electrónico para obtener un enlace de verificación.') }}</h5>
-            <h5>{{ __('Si no recibiste el correo electrónico') }}, <a style="color:blue;" href="{{ route('verification.resend') }}">{{ __(' haga clic aquí para solicitar otro') }}</a>.</h5>
+            <p>{{ __('Antes de continuar, revise su correo electrónico para obtener un enlace de verificación.') }}</p>
+            <p>{{ __('Si no recibiste el correo electrónico') }}, <a class="text-info" href="{{ route('verification.resend') }}">{{ __(' haga clic aquí para solicitar otro') }}</a>.</p>
           </div>
         </div>
       </div>

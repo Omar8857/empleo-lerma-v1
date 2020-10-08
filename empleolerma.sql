@@ -2,7 +2,8 @@
 SQLyog Ultimate v11.11 (64 bit)
 MySQL - 5.7.21-21 : Database - proye135_EmpleoLerma
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -12,9 +13,9 @@ MySQL - 5.7.21-21 : Database - proye135_EmpleoLerma
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`proye135_EmpleoLerma` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`lerma_empleo` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
 
-USE `proye135_EmpleoLerma`;
+USE `lerma_empleo`;
 
 /*Table structure for table `DatosCiudadano` */
 
@@ -22,30 +23,30 @@ DROP TABLE IF EXISTS `DatosCiudadano`;
 
 CREATE TABLE `DatosCiudadano` (
   `id_persona` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `nombre_completo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `telefono` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fecha_nacimiento` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `genero` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `edo_civil` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lugar_nacimiento` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `EntFed` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `municipio` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `calle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `numero` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `colonia` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `CP` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `discapacidad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `curp` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ComSeEnt` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `foto_perfil` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombre_completo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `telefono` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fecha_nacimiento` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `genero` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `edo_civil` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lugar_nacimiento` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `EntFed` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `municipio` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `calle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `numero` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `colonia` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `CP` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `discapacidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `curp` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ComSeEnt` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `foto_perfil` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id` bigint(20) unsigned NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_persona`),
   KEY `datosciudadano_id_foreign` (`id`),
   CONSTRAINT `datosciudadano_id_foreign` FOREIGN KEY (`id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `DatosCiudadano` */
 
@@ -83,22 +84,22 @@ DROP TABLE IF EXISTS `Escolaridad`;
 
 CREATE TABLE `Escolaridad` (
   `IdEscolaridad` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `grado_estudios` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `carrera_especialidad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `situacion_academica` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `idioma` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `dominio` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `conocimientos_esp` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `habilidades_esp` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cursos` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `grado_estudios` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `carrera_especialidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `situacion_academica` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `idioma` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dominio` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `conocimientos_esp` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `habilidades_esp` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cursos` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id` bigint(20) unsigned NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`IdEscolaridad`),
   KEY `escolaridad_id_foreign` (`id`),
   CONSTRAINT `escolaridad_id_foreign` FOREIGN KEY (`id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `Escolaridad` */
 
@@ -154,21 +155,21 @@ DROP TABLE IF EXISTS `PerfilLaboral`;
 
 CREATE TABLE `PerfilLaboral` (
   `id_perfil` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `nombre_RS` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `titulo_puesto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `funciones_actividades` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `salario_mensual` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tipo_empleo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombre_RS` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `titulo_puesto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `funciones_actividades` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `salario_mensual` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tipo_empleo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `fecha_ingreso` date DEFAULT NULL,
   `fecha_separacion` date DEFAULT NULL,
   `id` bigint(20) unsigned NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_perfil`),
   KEY `perfillaboral_id_foreign` (`id`),
   CONSTRAINT `perfillaboral_id_foreign` FOREIGN KEY (`id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `PerfilLaboral` */
 
@@ -178,21 +179,21 @@ DROP TABLE IF EXISTS `PuestoDeseado`;
 
 CREATE TABLE `PuestoDeseado` (
   `IdPuestoDeseado` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `puesto_deseado` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ocupacion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `experiencia_puesto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tipo_empleo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `salario_mensual` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `dispo_viajar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `dispo_radicar_fuera` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `puesto_deseado` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ocupacion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `experiencia_puesto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tipo_empleo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `salario_mensual` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dispo_viajar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dispo_radicar_fuera` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id` bigint(20) unsigned NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`IdPuestoDeseado`),
   KEY `puestodeseado_id_foreign` (`id`),
   CONSTRAINT `puestodeseado_id_foreign` FOREIGN KEY (`id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `PuestoDeseado` */
 
@@ -202,18 +203,18 @@ DROP TABLE IF EXISTS `SituacionLaboral`;
 
 CREATE TABLE `SituacionLaboral` (
   `IdSituacionLab` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `trabajo_actual` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `motivo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `trabajo_actual` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `motivo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `fecha_busquedaempleo` date DEFAULT NULL,
-  `disponibilidad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `disponibilidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id` bigint(20) unsigned NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`IdSituacionLab`),
   KEY `situacionlaboral_id_foreign` (`id`),
   CONSTRAINT `situacionlaboral_id_foreign` FOREIGN KEY (`id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `SituacionLaboral` */
 
@@ -251,21 +252,21 @@ DROP TABLE IF EXISTS `curriculumusers`;
 
 CREATE TABLE `curriculumusers` (
   `id_curriculum` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `objetivo_prof` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `experiencia_prof` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `area_especialidad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `habilidades` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `educacion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `idiomas` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cursos_y_certificaciones` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `objetivo_prof` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `experiencia_prof` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `area_especialidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `habilidades` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `educacion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `idiomas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cursos_y_certificaciones` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id` bigint(20) unsigned NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_curriculum`),
   KEY `curriculumusers_id_foreign` (`id`),
   CONSTRAINT `curriculumusers_id_foreign` FOREIGN KEY (`id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `curriculumusers` */
 
@@ -275,29 +276,29 @@ DROP TABLE IF EXISTS `datos_empresas`;
 
 CREATE TABLE `datos_empresas` (
   `id_empresa` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `nombre_RS` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `calle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `numero` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `colonia` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `CP` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `municipio` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `estado` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `RFC` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tel1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tel2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pagina_electronica` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `actividad_economica` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `numero_empleados` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ComoSeEnt` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `foto_perfil` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombre_RS` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `calle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `numero` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `colonia` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `CP` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `municipio` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estado` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `RFC` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tel1` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tel2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pagina_electronica` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `actividad_economica` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `numero_empleados` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ComoSeEnt` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `foto_perfil` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id` bigint(20) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_empresa`),
   KEY `datos_empresas_id_foreign` (`id`),
   CONSTRAINT `datos_empresas_id_foreign` FOREIGN KEY (`id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `datos_empresas` */
 
@@ -308,17 +309,17 @@ DROP TABLE IF EXISTS `fechas`;
 CREATE TABLE `fechas` (
   `id_fecha` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `fecha` datetime DEFAULT NULL,
-  `periodico_ofertas` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `portal_empleo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `feria_empleo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `radio_mexiquense` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `periodico_ofertas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `portal_empleo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `feria_empleo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `radio_mexiquense` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_vacante` bigint(20) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_fecha`),
   KEY `fechas_id_vacante_foreign` (`id_vacante`),
   CONSTRAINT `fechas_id_vacante_foreign` FOREIGN KEY (`id_vacante`) REFERENCES `vacantes` (`id_vacante`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `fechas` */
 
@@ -342,21 +343,21 @@ DROP TABLE IF EXISTS `informacion_contactos`;
 
 CREATE TABLE `informacion_contactos` (
   `id_contacto` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `nombre_contacto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cargo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `telefono` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `medio_preferente_contacto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `dias_entrevista` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `horario_entrevista_inicial` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `horario_entrevista_final` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombre_contacto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cargo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `telefono` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `medio_preferente_contacto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dias_entrevista` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `horario_entrevista_inicial` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `horario_entrevista_final` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_vacante` bigint(20) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_contacto`),
   KEY `informacion_contactos_id_vacante_foreign` (`id_vacante`),
   CONSTRAINT `informacion_contactos_id_vacante_foreign` FOREIGN KEY (`id_vacante`) REFERENCES `vacantes` (`id_vacante`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `informacion_contactos` */
 
@@ -366,10 +367,10 @@ DROP TABLE IF EXISTS `migrations`;
 
 CREATE TABLE `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `migrations` */
 
@@ -380,11 +381,11 @@ insert  into `migrations`(`id`,`migration`,`batch`) values (188,'2014_10_12_0000
 DROP TABLE IF EXISTS `password_resets`;
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   KEY `password_resets_email_index` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `password_resets` */
 
@@ -409,7 +410,7 @@ CREATE TABLE `postulaciones` (
   CONSTRAINT `postulaciones_id_persona_foreign` FOREIGN KEY (`id_persona`) REFERENCES `DatosCiudadano` (`id_persona`),
   CONSTRAINT `postulaciones_id_usuario_foreign` FOREIGN KEY (`id_usuario`) REFERENCES `users` (`id`),
   CONSTRAINT `postulaciones_id_vacante_foreign` FOREIGN KEY (`id_vacante`) REFERENCES `vacantes` (`id_vacante`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `postulaciones` */
 
@@ -419,15 +420,15 @@ DROP TABLE IF EXISTS `recientes`;
 
 CREATE TABLE `recientes` (
   `id_reciente` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `nombre_reciente` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre_reciente` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `id_usuario` bigint(20) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_reciente`),
   KEY `recientes_id_usuario_foreign` (`id_usuario`),
   CONSTRAINT `recientes_id_usuario_foreign` FOREIGN KEY (`id_usuario`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `recientes` */
 
@@ -437,30 +438,30 @@ DROP TABLE IF EXISTS `requisitos_vacantes`;
 
 CREATE TABLE `requisitos_vacantes` (
   `id_requisitos` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `personas_con_discapacidad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mencione_discapacidad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `adultos_mayores` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `causa_origina_vacante` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `escolaridad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `carrera_especialidad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `situacion_academica` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `experiencia_MinRequerida` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `minima_edad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `maxima_edad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `idioma` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `computacion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sexo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `disponibilidad_viajar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `disponibilidad_RadicarFuera` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `prestaciones_ofrecidas` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `observaciones` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `personas_con_discapacidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mencione_discapacidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `adultos_mayores` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `causa_origina_vacante` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `escolaridad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `carrera_especialidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `situacion_academica` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `experiencia_MinRequerida` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `minima_edad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `maxima_edad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `idioma` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `computacion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sexo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `disponibilidad_viajar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `disponibilidad_RadicarFuera` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `prestaciones_ofrecidas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `observaciones` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_vacante` bigint(20) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_requisitos`),
   KEY `requisitos_vacantes_id_vacante_foreign` (`id_vacante`),
   CONSTRAINT `requisitos_vacantes_id_vacante_foreign` FOREIGN KEY (`id_vacante`) REFERENCES `vacantes` (`id_vacante`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `requisitos_vacantes` */
 
@@ -484,15 +485,15 @@ DROP TABLE IF EXISTS `usercv`;
 
 CREATE TABLE `usercv` (
   `id_cv` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `nombre_cv` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombre_cv` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id` bigint(20) unsigned NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_cv`),
   KEY `usercv_id_foreign` (`id`),
   CONSTRAINT `usercv_id_foreign` FOREIGN KEY (`id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `usercv` */
 
@@ -502,18 +503,18 @@ DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `telefono` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tipo_user` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `telefono` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `tipo_user` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `users` */
 
@@ -523,21 +524,21 @@ DROP TABLE IF EXISTS `vacantes`;
 
 CREATE TABLE `vacantes` (
   `id_vacante` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `titulo_puesto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion_breve` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FunActi_realizar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `conocimientos_requeridos` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `habilidades_requeridos` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `direccioncompleta` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tipo_empleo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `salario_mensual` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lugar_vacante` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `dias_laboral` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `titulo_puesto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `descripcion_breve` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FunActi_realizar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `conocimientos_requeridos` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `habilidades_requeridos` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `direccioncompleta` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tipo_empleo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `salario_mensual` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lugar_vacante` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dias_laboral` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `hora_entrada` time DEFAULT NULL,
   `hora_salida` time DEFAULT NULL,
-  `numero_plazas` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `vigencia_vacante` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `numero_plazas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `vigencia_vacante` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_empresa` bigint(20) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -545,7 +546,7 @@ CREATE TABLE `vacantes` (
   UNIQUE KEY `vacantes_slug_unique` (`slug`),
   KEY `vacantes_id_empresa_foreign` (`id_empresa`),
   CONSTRAINT `vacantes_id_empresa_foreign` FOREIGN KEY (`id_empresa`) REFERENCES `datos_empresas` (`id_empresa`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `vacantes` */
 

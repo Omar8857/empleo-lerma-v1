@@ -72,9 +72,10 @@
   <br>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card" style="border-width: 1px; border-style: solid; border-color: black;">
-          <div class="card-header gradient-brand" style="color: white;"><h5>{{ __('Restablecimiento de contraseña para la cuenta con correo electronico: ') }} "{{$email}}"</h5></div>
+      <div class="col-md-8 mt-5">
+        <div class="card shadow">
+          <div class="card-header card-header bg-info text-white">
+            <h6>{{ __('Restablecer la contraseña para la cuenta con correo electronico: ') }} <strong> {{$email}} </strong></h6></div>
           <div class="card-body">
             <form method="POST" action="{{ route('password.update') }}" class="data-form">
               @csrf

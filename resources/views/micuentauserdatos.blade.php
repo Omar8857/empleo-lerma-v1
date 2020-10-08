@@ -80,7 +80,7 @@
               @endif
             @else
               <li>
-                <a id="navbarDropdown" class=" btn nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                <a id="navbarDropdown" class=" btn dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                   {{ Auth::user()->nombre }} <span class="caret"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -479,13 +479,13 @@
                   </div>
                   <div class="card-body">
                     <div class="container">
-                      <nav class="navbar navbar-expand-lg navbar-dark gradient-brand">
+                      <nav class="navbar navbar-expand-lg navbar-light">
                         <div class="container">
                           <button class="navbar-toggler ri" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Menu">
                             <span class="navbar-toggler-icon"></span>
                           </button>
                           <div class="collapse navbar-collapse" id="navbarToggler"> 
-                            <ul class="navbar-nav nav siguiente">
+                            <ul class="navbar-nav nav bg-secondary">
                               <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#esconoc">Escolaridad</a>
                               </li>

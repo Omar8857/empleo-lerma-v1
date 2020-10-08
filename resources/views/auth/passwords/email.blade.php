@@ -72,19 +72,20 @@
   <br>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card" style="border-width: 1px; border-style: solid; border-color: black;">
-          <div class="card-header gradient-brand" style="color: white;">
-            <h5>{{ __('Para poder restablecer tu contraseña, ingresa la información necesaria que se te pide a continuación.') }}</h5>
+      <div class="col-md-8 mt-5">
+        <div class="card shadow">
+          <div class="card-header bg-info text-white">
+            <h6>{{ __('Restablecer contraseña') }}</h6>
           </div>
           <div class="card-body">
             <center>
               @if (session('status'))
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-info" role="alert">
                   {{ session('status') }}
                 </div>
               @endif
             </center>
+            <p>{{ __('Para poder restablecer tu contraseña, ingresa la información necesaria que se te pide a continuación.') }}</p><br/>
             <form method="POST" action="{{ route('password.email') }}" class="data-form">
               @csrf
               <div class="form-group row">

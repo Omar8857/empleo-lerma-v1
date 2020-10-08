@@ -29,6 +29,13 @@
                     <strong>{{ $message }}</strong>
                 </span>
               @enderror
+              @if (Route::has('password.request'))
+              <small class="form-text text-muted">
+                <a class="text-info" href="{{ route('password.request') }}">
+                  {{ __('¿Olvidaste tu Contraseña?') }}
+                </a>
+              </small>
+              @endif
             </div>
             <div class="form-group">
               <div class="form-check">
@@ -36,11 +43,6 @@
                 <label class="form-check-label" for="remember">{{ __('Mantenerme Conectado') }}</label>
               </div>
               <button type="submit" class="btn btn-primary">{{ __('Iniciar Sesión') }}</button>
-              @if (Route::has('password.request'))
-                <a class="btn btn-link" href="{{ route('password.request') }}">
-                  {{ __('¿Olvidaste tu Contraseña?') }}
-                </a>
-              @endif
             </div>
           </form>
         </div>
