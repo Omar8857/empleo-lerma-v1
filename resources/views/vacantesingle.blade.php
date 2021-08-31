@@ -1,78 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('content')
-    <!--header-->
-    <header>
-      <div class="brand text-center">
-        <a href="{{url('/')}}">
-          <img src="{{asset('assets/img/logos-lerma.png')}}" alt="lerma">
-        </a>
-      </div>
-      <div class="social-icons">
-        <div class="container">
-          <ul>
-          @guest
-            <li>
-              <a href="{{ route('login') }}" class="btn"> Iniciar Sesión </a>
-            </li>
-            @if (Route::has('register'))
-            <li>
-              <a href="{{ route('register') }}" class="btn"> Registrarse </a>
-            </li>
-            @endif
-            @else
-            <li>
-              <a id="navbarDropdown" class=" btn dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                {{ Auth::user()->nombre }} <span class="caret"></span>
-              </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{ route('micuenta') }}">
-                    {{ __('Mi Cuenta') }}
-                </a>
-                <a class="dropdown-item" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                    {{ __('Cerrar Sesión') }}
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                  @csrf
-                </form>
-            </div>
-            @endguest
-            </li>
-            <li class="facebook">
-              <a href="#" class="s-i" target="_blank"></a>
-            </li>
-            <li class="instagram">
-              <a href="#" class="s-i" target="_blank"></a>
-            </li>
-            <li class="youtube">
-              <a href="#" class="s-i" target="_blank"></a>
-            </li>
-          </ul>
-        </div>        
-      </div>
-      <nav class="navbar navbar-expand-lg navbar-dark gradient-brand">
-        <div class="container">
-          <button class="navbar-toggler ri" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Menu">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarToggler"> 
-            <ul class="navbar-nav">
-             <li class="nav-item">
-                <a class="nav-link" href="https://visita.lerma.gob.mx/quehacer">BUSCO EMPLEO</a>
-             </li>
-             <li class="nav-item">
-                 <a class="nav-link" href="https://visita.lerma.gob.mx/queSucede">OFREZCO EMPLEO</a>
-             </li>
-             <li class="nav-item">
-                 <a class="nav-link" href="https://visita.lerma.gob.mx/conoce_lerma">EMPLEO LERMA</a>
-             </li>
-         </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
+
     <!--Vacancies-->
     <section class="pt-md-3 m-3"> 
       <div class="container my-md-5">
@@ -123,6 +52,7 @@
             </div>
             <h4 class="my-3 font-weight-bold">Requisitos: </h4>
             <div class="content mr-md-4">
+            @auth
               <ul>
                 <li><p><b>Acepta personas con discapacidad: </b>{{$requisitos->personas_con_discapacidad}}, {{$requisitos->mencione_discapacidad}}</p></li>
                 <li><p><b>Escolaridad: </b>{{$requisitos->escolaridad}}</p></li>
@@ -137,8 +67,14 @@
                 <li><p><b>Disponibilidad de radicar fuera: </b>{{$requisitos->disponibilidad_RadicarFuera}}</p></li>
                 <li><p><b>Observaciones: </b>{{$requisitos->observaciones}}</p></li>
               </ul>
+            @endauth
+            @guest
+              <p style="color:#17a2b8">Inicia sesion para ver datos.</p>
+            @endguest
             </div>
             <h4 class="my-3 font-weight-bold">Contacto: </h4>
+            <div class="content mr-md-4">
+            @auth
               <ul>
                 <li><p><b>Nombre: </b>{{$contacto->nombre_contacto}}<p></li>
                 <li><p><b>Cargo: </b>{{$contacto->cargo}}<p></li>
@@ -146,20 +82,29 @@
                 <li><p><b>Correo Electrónico: </b>{{$contacto->email}}<p></li>
                 <li><p><b>Medio preferente: </b>{{$contacto->medio_preferente_contacto}}<p></li>
               </ul>
+            @endauth
+            @guest
+              <p style="color:#17a2b8">Inicia sesion para ver datos.</p>
+            @endguest
             </div>
           </div>
           <div class="col-12 col-md-4">
             <div class="mb-4 ml-md-4">
-              <div class="card postulation shadow ">
-                <img src="{{asset('archivo/'.$empresa->foto_perfil)}}" class="card-img-top" alt="$empresa->foto_perfil">
-                <div class="card-body">
+              <div class="card postulation shadow p-3">
+              <div style="height: 120px; width: 120px; margin:auto; 
+                          background: url('{{asset('archivo/'.$empresa->foto_perfil)}}') no-repeat center center; 
+                          -webkit-background-size: contain;
+                          -moz-background-size: contain;
+                          -o-background-size: contain;
+                          background-size: contain;" class="card-img-top" alt="{{$empresa->foto_perfil}}"></div>
+                <div class="card-body p-0">
                   <h5 class="card-title text-center">{{$empresa->nombre_RS}}</h5>
                   <div class="classification text-center mb-4">
                     <ol>
                       <i class="fas fa-star mx-2"></i>
                       <i class="fas fa-star mx-2"></i>
                       <i class="fas fa-star mx-2"></i>
-                      <i class="far fa-star mx-2"></i>
+                      <i class="fas fa-star mx-2"></i>
                       <i class="far fa-star mx-2"></i>
                     </ol>                    
                   </div>
@@ -190,8 +135,8 @@
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                  <div class="modal-header gradient-brand">
-                    <h5 class="modal-title" style="color:white" id="exampleModalLongTitle">Lo sentimos, no puedes postularte a esta vacante.</h5>
+                  <div class="modal-header">
+                    <h5 class="modal-title">Lo sentimos, no puedes postularte a esta vacante.</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span style="color:white" aria-hidden="true">&times;</span>
                     </button>
@@ -209,9 +154,6 @@
                     <div align="center">
                     <a href="{{route('register')}}" class="btn btn-primary col-md-4 btn-block">Registrarte</a>
                     </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                   </div>
                 </div>
               </div>
@@ -273,11 +215,11 @@
         </div>
       </div>
     </section>
-    <!--Related-->
+    <!--Related
     <section class="bg-light">
       <div class="container my-md-5">
         <div class="row justify-content-between">
-          <!-- reviews-->
+          <!-- reviews
           <div class="col-12 ">
             <h4 class="mb-4 mx-3">Vacantes Similares</h4>
             <div class="card-deck mx-3 mx-md-0">
@@ -321,46 +263,7 @@
           </div>
         </div>
       </div>
-    </section>
-    <!--footer-->
-    <footer>
-      <div class="container-fluid bg-dark text-light">
-        <div class="container">
-          <div class="row py-5 justify-content-center">
-            <div class="col-4 col-md-1">
-              <img src="{{asset('assets/img/lerma-footer.png')}}" alt="" class="img-fluid">
-            </div>
-            <div class="col-10 col-md-4">
-              <h5 class="text-uppercase pb-1">Contactanos</h5>
-              <i class="fas fa-phone fa-xs fa-footer pr-3"></i><a href="tel:+52 728 2829903" class="text-light">+52 (728) 2829903</a><br>
-              <i class="far fa-envelope fa-xs fa-footer pr-3"></i><a href="mailto:empleolerma@gmail.com" class="text-light">empleolerma@gmail.com</a><br>
-              <i class="fas fa-map-marker-alt fa-xs fa-footer pr-3"></i><a href="#" class="text-light">Palacio Municipal s/n Col. Centro, Lerma, Estado de México</a>
-            </div>
-            <div class="col-10 col-md-3">
-              <h5 class="text-uppercase pb-1">Síguenos</h5>
-              <i class="fab fa-facebook fa-xs fa-footer pr-3"></i><a href="#" class="text-light">Facebook</a><br>
-              <i class="fab fa-instagram-square fa-xs fa-footer pr-3"></i><a href="#" class="text-light">Instagram</a><br>
-              <i class="fab fa-youtube fa-xs fa-footer pr-3"></i><a href="#" class="text-light">YouTube</a><br>
-            </div>
-            <div class="col-10 col-md-4">
-              <h5 class="text-uppercase pb-1">Enlaces de interes</h5>
-              <a href="https://www.lerma.gob.mx/" class="text-light">Ayuntamiento de Lerma</a><br>
-              <a href="https://strabajo.edomex.gob.mx" class="text-light">Secretaría del Trabajo del Estado de México</a><br>
-              <a href="https://www.gob.mx/stps" class="text-light">Secretaría del Trabajo y Previsión Social</a><br>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="container-fluid bg-secondary">
-        <div class="container">
-          <div class="row py-3 justify-content-md-center text-center">
-            <div class="col-12 col-md-8 copy">
-              <a href="#" class="text-white small text-uppercase pr-4">Derechos reservados 2019</a>
-              <a href="http://www.lerma.gob.mx/ayuntamiento/aviso-de-privacidad/" class="text-white small text-uppercase pr-4">Anuncio de privacidad</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>  
+    </section>-->
+
 
 @endsection

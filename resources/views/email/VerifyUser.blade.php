@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Welcome Email</title>
-  </head>
-  <body>
-    <h2>Welcome to the site {{$user['name']}}</h2>
-    <br/>
-    Your registered email-id is {{$user['email']}} , Please click on the below link to verify your email account
-    <br/>
-    <a href="{{url('user/verify', $user->verifyUser->token)}}">Verify Email</a>
-  </body>
+<html lang="es">
+<head>
+    <title>Bienvenido a Empleo Lerma</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <h2>Hola {{ $name }}, gracias por registrarte en <strong>Empleo Lerma</strong> !</h2>
+    <p>Por favor confirma tu correo electrónico {{$user['email']}}.</p>
+    <p>Para ello simplemente debes hacer click en el siguiente enlace:</p>
+    <a href="{{ url('user/verify', $user->verifyUser->token) }}">Clic para confirmar email</a>
+
+</body>
 </html>

@@ -1,135 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Empleo Lerma</title>
-  <link href="{{asset('assets/img/escudo-de-armas-lerma.png')}}" rel="shortcut icon">
-  <meta name="robots" content="index,follow">
-  <meta name="description" content="Empleo Lerma">
-  <meta name="author" content="LERMA.GOB.MX">
-  <meta name="keywords" content="lerma, empleo, municipio">
-  <meta name="copyright" content="Copyright 2020 Ayuntamiento de Lerma">
-  <link rel="canonical" href="https://empleo.lerma.gob.mx">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://empleo.lerma.gob.mx">
-  <meta property="og:title" content="Empleo Lerma">
-  <meta property="og:description" content="Empleo Lerma">
-  <meta property="og:image" content="https://empleo.lerma.gob.mx/img/logos-lerma.png">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="{{ asset('assets/css/src/style.min.css')}}">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function (){ 
-      $('.btnNext').click(function(){
-        $('.siguiente .active').parent().next('li').find('a').trigger('click');
-      });
+@extends('layouts.base') 
 
-      $('.btnPrevious').click(function() {
-        $('.siguiente .active').parent().prev('li').find('a').trigger('click');
-      });
-
-      $('#entfed').change(function() {
-          var EntFed = $(this).val();
-          $.ajax({
-            url: 'getMpios',
-            type: 'GET',
-            data: {EntFed:EntFed},
-            headers: {
-                      'X-CSRF-Token': '{{ csrf_token() }}',
-                     },
-            success:function(response){
-              var datos = JSON.parse(response);
-              var len = response.length;
-              $("#municipio").empty();
-              for( var i = 0; i<len; i++){
-                  // var IdMunicipio = datos[i]['IdMunicipio'];
-                  var Municipio = datos[i]['Municipio'];
-                  $("#municipio").append("<option value='"+Municipio+"'>"+Municipio+"</option>");
-              }
-            }
-          });
-        });
-      });
-  </script>
-</head>
-<body>
-  <!--header-->
-  <header>
-    <div class="brand text-center">
-      <a href="{{url('/')}}">
-        <img src="{{asset('assets/img/logos-lerma.png')}}" alt="lerma">
-      </a>
-    </div>
-    <div class="social-icons">
-      <div class="container">
-        <ul>
-          @guest
-            <li>
-              <a href="{{ route('login') }}" class="btn"> Iniciar Sesión </a>
-            </li>
-            @if (Route::has('register'))
-              <li>
-              <a href="{{ route('register') }}" class="btn"> Registrarse </a>
-              </li>
-            @endif
-          @else
-            <li>
-              <a id="navbarDropdown" class=" btn dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                {{ Auth::user()->nombre }} <span class="caret"></span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{ route('micuenta') }}">
-                    {{ __('Mi Cuenta') }}
-                </a>
-                <a class="dropdown-item" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                    {{ __('Cerrar Sesión') }}
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                  @csrf
-                </form>
-              </div>
-            </li>
-          @endguest
-          <li class="facebook">
-            <a href="#" class="s-i" target="_blank"></a>
-          </li>
-          <li class="instagram">
-            <a href="#" class="s-i" target="_blank"></a>
-          </li>
-          <li class="youtube">
-            <a href="#" class="s-i" target="_blank"></a>
-          </li>
-        </ul>
-      </div>        
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-dark gradient-brand">
-      <div class="container">
-        <button class="navbar-toggler ri" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Menu">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarToggler"> 
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="https://visita.lerma.gob.mx/quehacer">BUSCO EMPLEO</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://visita.lerma.gob.mx/queSucede">OFREZCO EMPLEO</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://visita.lerma.gob.mx/conoce_lerma">EMPLEO LERMA</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
+@section('content')
   <!--Dashboard-->
   <section class="events py-5">
     <div class="container">
@@ -233,17 +104,18 @@
                   <h5 class="text-center font-weight-bold">Datos Empresariales</h5>
                 </div>
                 @if($empresa)
-                  <div class="card-body">
+                  <div class="card-body pt-0">
                     <div class="container">
                       <!-- Nav tabs -->
-                      <ul class="nav nav-tabs justify-content-center navbar-light bg-light gradient-brand" role="tablist">
+                      <ul class="nav nav-pills justify-content-center" role="tablist">
                         <li class="nav-item">
-                          <a class="nav-link active font-weight-bold" style="color:white;" data-toggle="tab" href="#verdatos">Ver Datos</a>
+                          <a class="nav-link active" data-toggle="tab" href="#verdatos">Ver Datos</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link font-weight-bold" style="color:white;" data-toggle="tab" href="#modificardatos">Editar Datos</a>
+                          <a class="nav-link" data-toggle="tab" href="#modificardatos">Editar Datos</a>
                         </li>
                       </ul>
+                      <hr class="mt-0">
                       <!-- Tab panes -->
                       <div class="tab-content">
                         <div id="verdatos" class="container tab-pane active"><br>
@@ -251,68 +123,73 @@
                           <div class="form-row data-form" align="center">
                             <div class="form-group col-md-12">
                               <label for="photoUser">Foto de Perfil</label><br> 
-                              <img style="border-radius:150px;" width="130px" height="130px" src="{{asset('archivo/'.$empresa->foto_perfil)}}" alt="{{$empresa->foto_perfil}}">
+                              <div style="height: 130px; width: 130px; border-radius:50%; 
+                                          background: url('{{asset('archivo/'.$empresa->foto_perfil)}}') no-repeat center center; 
+                                          -webkit-background-size: contain;
+                                          -moz-background-size: contain;
+                                          -o-background-size: contain;
+                                          background-size: contain;" alt="{{$empresa->foto_perfil}}"></div>
                             </div>
                               <hr/>
                             <div class="form-group col-md-8">
                               <label for="userName">Nombre o Razón Social</label>
-                              <input type="text" readonly class="form-control" id="companyName" name="companyName" placeholder="Nombre o Razón Social" value="{{$empresa->nombre_RS}}" required>
+                              <input type="text" readonly class="form-control" name="companyName" placeholder="Nombre o Razón Social" value="{{$empresa->nombre_RS}}" required>
                             </div>
                             <div class="form-group col-md-4">
                               <label for="userName">RFC</label>
-                              <input type="text" readonly class="form-control" id="CompanyRFC" name="CompanyRFC" placeholder="RFC" value="{{$empresa->RFC}}" required>
+                              <input type="text" readonly class="form-control" name="CompanyRFC" placeholder="RFC" value="{{$empresa->RFC}}" required>
                             </div>
                             <div class="form-group col-md-6">
                               <label for="stateUser">Estado</label>
-                              <input type="text" readonly class="form-control" id="stateCompany" name="stateCompany" placeholder="Estado" value="{{$empresa->estado}}" required>
+                              <input type="text" readonly class="form-control" name="stateCompany" placeholder="Estado" value="{{$empresa->estado}}" required>
                             </div>
                             <div class="form-group col-md-6">
                               <label for="cityUser">Municipio</label>
-                              <input type="text" readonly class="form-control" id="cityCompany" name="cityCompany" placeholder="Municipio" value="{{$empresa->municipio}}" required>
+                              <input type="text" readonly class="form-control" name="cityCompany" placeholder="Municipio" value="{{$empresa->municipio}}" required>
                             </div>
                             <div class="form-group col-md-8">
                               <label for="villageUser">Colonia</label>
-                              <input type="text" readonly class="form-control" id="coloniaCompany" name="coloniaCompany" placeholder="Colonia" value="{{$empresa->colonia}}" required>
+                              <input type="text" readonly class="form-control" name="coloniaCompany" placeholder="Colonia" value="{{$empresa->colonia}}" required>
                             </div>
                             <div class="form-group col-md-4">
                               <label for="cpUser">Código Postal</label>
-                              <input type="number" readonly class="form-control" id="cpCompany" name="cpCompany" placeholder="Código Postal" value="{{$empresa->CP}}" required> 
+                              <input type="number" readonly class="form-control" name="cpCompany" placeholder="Código Postal" value="{{$empresa->CP}}" required> 
                             </div> 
                               <div class="form-group col-md-8">
                                 <label for="villageUser">Calle</label>
-                                <input type="text" readonly class="form-control" id="calleCompany" name="calleCompany" placeholder="Calle" value="{{$empresa->calle}}" required>
+                                <input type="text" readonly class="form-control" name="calleCompany" placeholder="Calle" value="{{$empresa->calle}}" required>
                             </div> 
                             <div class="form-group col-md-4">
                               <label for="villageUser">Número</label>
-                              <input type="text" readonly class="form-control" id="numeroCompany" name="numeroCompany" placeholder="Número" value="{{$empresa->numero}}" required>
+                              <input type="text" readonly class="form-control" name="numeroCompany" placeholder="Número" value="{{$empresa->numero}}" required>
                             </div> 
                             <div class="form-group col-md-6">
                               <label for="phoneUser">Teléfono 1</label>
-                              <input type="number" readonly class="form-control" id="phoneUser1" name="phoneUser1" placeholder="Teléfono 1" value="{{$empresa->tel1}}" required>
+                              <input type="number" readonly class="form-control" name="phoneUser1" placeholder="Teléfono 1" value="{{$empresa->tel1}}" required>
                             </div>
                             <div class="form-group col-md-6">
                               <label for="phoneUser">Teléfono 2</label>
-                              <input type="number" readonly class="form-control" id="phoneUser2" name="phoneUser2" placeholder="Teléfono 2" value="{{$empresa->tel2}}" required>
+                              <input type="number" readonly class="form-control" name="phoneUser2" placeholder="Teléfono 2" value="{{$empresa->tel2}}" required>
                             </div>
                             <div class="form-group col-md-6">
                               <label for="email">Correo Electrónico</label>
-                              <input type="text" readonly class="form-control" id="emailCompany" name="emailCompany" placeholder="Correo Electrónico" value="{{$empresa->email}}" required>
+                              <input type="text" readonly class="form-control" name="emailCompany" placeholder="Correo Electrónico" value="{{$empresa->email}}" required>
                             </div>
                             <div class="form-group col-md-6">
                               <label for="pagElectronica">Página Electrónica</label>
-                              <input type="text" readonly class="form-control" id="pagElectronica" name="pagElectronica" placeholder="Página Electrónica" value="{{$empresa->pagina_electronica}}" required>
+                              <input type="text" readonly class="form-control" name="pagElectronica" placeholder="Página Electrónica" value="{{$empresa->pagina_electronica}}" required>
                             </div>
                             <div class="form-group col-md-8">
                               <label for="acteco">Actividad Económica</label>
-                              <input type="text" readonly class="form-control" id="acteco" name="acteco" placeholder="Actividad Económica" value="{{$empresa->actividad_economica}}" required> 
+                              <input type="text" readonly class="form-control" name="acteco" placeholder="Actividad Económica" value="{{$empresa->actividad_economica}}" required> 
                             </div>
                             <div class="form-group col-md-4">
                               <label for="numemple">Número de Empleados</label>
-                              <input type="text" readonly class="form-control" id="numemple" name="numemple" placeholder="Número de Empleados" value="{{$empresa->numero_empleados}}" required>
+                              <input type="text" readonly class="form-control" name="numemple" placeholder="Número de Empleados" value="{{$empresa->numero_empleados}}" required>
                             </div>
                             <div class="form-group col-md-12">
                               <label for="ComoSeEnt">¿Cómo Se Entero De La "Bolsa de Trabajo Para el Municipio de Lerma"?</label>
-                              <input type="text"readonly class="form-control" id="ComoSeEnt" name="ComoSeEnt" placeholder="¿Cómo Se Entero De La Bolsa de Trabajo Para el Municipio de Lerma?" value="{{$empresa->ComoSeEnt}}" required> 
+                              <input type="text"readonly class="form-control" name="ComoSeEnt" placeholder="¿Cómo Se Entero De La Bolsa de Trabajo Para el Municipio de Lerma?" value="{{$empresa->ComoSeEnt}}" required> 
                             </div>
                           </div>
                         </div>
@@ -325,7 +202,12 @@
                               <div class="form-row" align="center">
                                 <div class="form-group col-md-6">
                                   <label for="photoUser" class="font-weight-bold">Foto Actual</label><br>
-                                  <img style="border-radius:150px;" width="130px" height="130px" src="{{asset('archivo/'.$empresa->foto_perfil)}}" alt="{{ $empresa->foto_perfil }}">
+                                  <div style="height: 130px; width: 130px; border-radius:50%; 
+                                          background: url('{{asset('archivo/'.$empresa->foto_perfil)}}') no-repeat center center; 
+                                          -webkit-background-size: contain;
+                                          -moz-background-size: contain;
+                                          -o-background-size: contain;
+                                          background-size: contain;" alt="{{$empresa->foto_perfil}}"></div>
                                 </div>
                                 <div class="form-group col-md-6">
                                   <label for="photoUser" class="font-weight-bold">Foto Nueva (Opcional)</label><br>
@@ -421,7 +303,7 @@
                     <!-- form profile -->
                     {{Form::open(['route' => 'guardardatosemp','files' => true, 'class' => 'data-form'])}}
                       @csrf
-                      <div class="form-row" align="center">
+                      <div class="form-row">
                         <div class="form-group col-md-12">
                           <label for="photoUser">Foto de Perfil</label><br> 
                           <input type="file" name="photoCompany" id="photoCompany" accept=".jpg,.jpeg,.png" title="Solo imagenes con extensión: jpg, jpeg, png" required>
@@ -429,11 +311,11 @@
                           <hr/>
                         <div class="form-group col-md-8">
                           <label for="userName">Nombre o Razón Social</label>
-                          <input type="text" class="form-control" id="companyName" name="companyName" placeholder="Nombre o Razón Social" value="{{old('companyName',Auth::user()->nombre)}}" required>
+                          <input type="text" class="form-control" id="companyName" name="companyName" value="{{old('companyName',Auth::user()->nombre)}}" required>
                         </div>
                         <div class="form-group col-md-4">
                           <label for="userName">RFC</label>
-                          <input type="text" class="form-control" id="CompanyRFC" name="CompanyRFC" placeholder="RFC" pattern="([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))((-)?([A-Z\d]{3}))" title="Ingrese un RFC valido." required>
+                          <input type="text" class="form-control" id="CompanyRFC" name="CompanyRFC" pattern="([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))((-)?([A-Z\d]{3}))" title="Ingrese un RFC valido." required>
                         </div>
                         <div class="form-group col-md-6">
                           <label for="entfed">Estado</label>
@@ -454,47 +336,47 @@
                         </div>
                         <div class="form-group col-md-8">
                           <label for="villageUser">Colonia</label>
-                          <input type="text" class="form-control" id="coloniaCompany" name="coloniaCompany" placeholder="Colonia" required>
+                          <input type="text" class="form-control" id="coloniaCompany" name="coloniaCompany" required>
                         </div>
                         <div class="form-group col-md-4">
                           <label for="cpUser">Código Postal</label>
-                          <input type="text" class="form-control" id="cpCompany" name="cpCompany" placeholder="Código Postal" pattern="[0-9]{5}" title="Ingrese Código Postal a 5 digitos" required> 
+                          <input type="text" class="form-control" id="cpCompany" name="cpCompany"  pattern="[0-9]{5}" title="Ingrese Código Postal a 5 digitos" required> 
                         </div> 
                         <div class="form-group col-md-8">
                           <label for="villageUser">Calle</label>
-                          <input type="text" class="form-control" id="calleCompany" name="calleCompany" placeholder="Calle" required>
+                          <input type="text" class="form-control" id="calleCompany" name="calleCompany" required>
                         </div> 
                         <div class="form-group col-md-4">
                           <label for="villageUser">Número</label>
-                          <input type="text" class="form-control" id="numeroCompany" name="numeroCompany" placeholder="Número" required>
+                          <input type="text" class="form-control" id="numeroCompany" name="numeroCompany" required>
                         </div> 
                         <div class="form-group col-md-6">
                           <label for="phoneUser">Teléfono 1</label>
-                          <input type="tel" class="form-control" id="phoneUser1" name="phoneUser1" placeholder="Teléfono 1" pattern="[0-9]{10}" title="Ingrese número a 10 dígitos" value="{{old('phoneUser1',Auth::user()->telefono)}}" required>
+                          <input type="tel" class="form-control" id="phoneUser1" name="phoneUser1" pattern="[0-9]{10}" title="Ingrese número a 10 dígitos" value="{{old('phoneUser1',Auth::user()->telefono)}}" required>
                         </div>
                         <div class="form-group col-md-6">
                           <label for="phoneUser">Teléfono 2</label>
-                          <input type="tel" class="form-control" id="phoneUser2" name="phoneUser2" placeholder="Teléfono 2" pattern="[0-9]{10}" title="Ingrese número a 10 dígitos" required>
+                          <input type="tel" class="form-control" id="phoneUser2" name="phoneUser2" pattern="[0-9]{10}" title="Ingrese número a 10 dígitos">
                         </div>
                         <div class="form-group col-md-6">
                           <label for="email">Correo Electrónico</label>
-                          <input type="email" class="form-control" id="emailCompany" name="emailCompany" placeholder="Correo Electrónico" value="{{old('emailCompany',Auth::user()->email)}}" required>
+                          <input type="email" class="form-control" id="emailCompany" name="emailCompany" value="{{old('emailCompany',Auth::user()->email)}}" required>
                         </div>
                         <div class="form-group col-md-6">
                           <label for="pagElectronica">Página Electrónica</label>
-                          <input type="text" class="form-control" id="pagElectronica" name="pagElectronica" placeholder="Página Electrónica" required>
+                          <input type="text" class="form-control" id="pagElectronica" name="pagElectronica" required>
                         </div>
                         <div class="form-group col-md-8">
                           <label for="acteco">Actividad Económica</label>
-                          <input type="text" class="form-control" id="acteco" name="acteco" placeholder="Actividad Económica" required> 
+                          <input type="text" class="form-control" id="acteco" name="acteco" required> 
                         </div>
                         <div class="form-group col-md-4">
                           <label for="numemple">Número de Empleados</label>
-                          <input type="number" class="form-control" id="numemple" name="numemple" placeholder="Número de Empleados" required>
+                          <input type="number" class="form-control" id="numemple" name="numemple" required>
                         </div>
                         <div class="form-group col-md-12">
                           <label for="ComoSeEnt">¿Cómo Se Entero De La "Bolsa de Trabajo Para el Municipio de Lerma"?</label>
-                          <input type="text" class="form-control" id="ComoSeEnt" name="ComoSeEnt" placeholder="¿Cómo Se Entero De La Bolsa de Trabajo Para el Municipio de Lerma?" required> 
+                          <input type="text" class="form-control" id="ComoSeEnt" name="ComoSeEnt" required> 
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                       </div>
@@ -572,7 +454,13 @@
                         @isset($vacantes)
                           @foreach ($vacantes as $vacante)
                             <a href="{{ route('vacante', $vacante->slug) }}" class="media mb-4">
-                              <img src="archivo/{{$vacante->foto_perfil}}" width="100px" height="100px" class="mr-3 shadow" alt="">
+                              <div style="height: 100px; width: 100px; 
+                                          background: url('{{asset('archivo/'.$empresa->foto_perfil)}}') no-repeat center center; 
+                                          -webkit-background-size: contain;
+                                          -moz-background-size: contain;
+                                          -o-background-size: contain;
+                                          background-size: contain;" class="mr-3 shadow" alt="{{$empresa->foto_perfil}}"></div>
+
                               <div class="media-body">
                                 <h5><small class="float-right txt-info">${{$vacante->salario_mensual}}</small></h5>
                                 <h5>{{$vacante->titulo_puesto}}</h5>
@@ -603,62 +491,53 @@
                         <span style="color:white" aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body p-0">
                       {{Form::open(['route' => 'guardarvacante', 'class' => 'data-form'])}}
                         @csrf
-                        <nav class="navbar navbar-expand-lg navbar-dark gradient-brand">
-                          <div class="container">
-                            <button class="navbar-toggler ri" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Menu">
-                              <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarToggler"> 
-                              <ul class="navbar-nav nav siguiente">
-                                <li class="nav-item">
-                                  <a class="nav-link active" data-toggle="tab" href="#datosvacante">Datos de la Vacante</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#requisitos">Requisitos de la Vacante</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#infocontacto">Información de Contacto</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#fechayp">Publicación</a>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </nav>
-                        <div class="tab-content">
+                        <ul class="nav nav-pills justify-content-center siguiente bg-light" role="tablist">
+                          <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#datosvacante">Datos de la Vacante</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" data-toggle="tab" href="#requisitos">Requisitos de la Vacante</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" data-toggle="tab" href="#infocontacto">Información de Contacto</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" data-toggle="tab" href="#fechayp">Publicación</a>
+                          </li>
+                        </ul>
+                        <div class="tab-content px-5">
                           <div id="datosvacante" class="container tab-pane active"><br>
-                            <div class="form-row" align="center">
+                            <div class="form-row">
                               <div class="form-group col-md-12"> 
                                 <h4 class="font-weight-bold">Datos de la Vacante</h4>
                                 <hr/>
                               </div>    
                               <div class="form-group col-md-12">   
                                 <label for="title" class="font-weight-bold">Título del puesto: <font color="red">*</font></label>
-                                <input type="text" class="form-control" id="title" name="title" Placeholder="Título del puesto" required>
+                                <input type="text" class="form-control" id="title" name="title" required>
                               </div>
                               <div class="form-group col-md-12">   
-                                <label for="description" class="font-weight-bold">Breve Descipción: <font color="red">*</font></label>
-                                <input type="text" class="form-control" id="description" name="description" Placeholder="Descripción breve del puesto" required>
+                                <label for="description" class="font-weight-bold">Breve Descripción: <font color="red">*</font></label>
+                                <input type="text" class="form-control" id="description" name="description" required>
                               </div>
                               <div class="form-group col-md-12">
-                                <label for="FuncionActividad" class="font-weight-bold">Funciones y actividades a relizar: <font color="red">*</font></label><br>
-                                <input type="text" class="form-control" name="FuncionActividad" placeholder="Funciones y actividades a realizar" required>
+                                <label for="FuncionActividad" class="font-weight-bold">Funciones y actividades a realizar: <font color="red">*</font></label><br>
+                                <input type="text" class="form-control" name="FuncionActividad" required>
                               </div>
                               <div class="form-group col-md-12">
                                 <label for="conocimientos" class="font-weight-bold">Conocimientos requeridos: <font color="red">*</font></label><br>
-                                <input type="text" class="form-control" name="conocimientos" placeholder="Conocimientos requeridos" required>
+                                <input type="text" class="form-control" name="conocimientos" required>
                               </div>
                               <div class="form-group col-md-12">
                                 <label for="habilidades" class="font-weight-bold">Habilidades requeridas: <font color="red">*</font></label><br>
-                                <input type="text" class="form-control" name="habilidades" placeholder="Habilidades requeridas" required>
+                                <input type="text" class="form-control" name="habilidades" required>
                               </div>
                               <div class="form-group col-md-12">
                                 <label for="direccion" class="font-weight-bold">Dirección donde se ubica la vacante: <font color="red">*</font></label><br>
-                                <input type="text" class="form-control" name="direccioncompleta" placeholder="Colonia, calle, número, etc" required>
+                                <input type="text" class="form-control" name="direccioncompleta" required>
                               </div>
                               <div class="form-group col-md-6">   
                                 <label for="tipoempleo" class="font-weight-bold">Tipo de empleo: <font color="red">*</font></label>
@@ -683,32 +562,32 @@
                               </div>
                               <div class="form-group col-md-6">   
                                 <label for="diaslaboral" class="font-weight-bold">Días a laborar: <font color="red">*</font></label>
-                                <input type="text" class="form-control" id="DiasLaboral" name="DiasLaboral" Placeholder="Días a laborar" required>
+                                <input type="text" class="form-control" id="DiasLaboral" name="DiasLaboral" required>
                               </div>
                               <div class="form-group col-md-6">   
                                 <label for="entrada" class="font-weight-bold">Hora de entrada: <font color="red">*</font></label>
-                                <input type="time" class="form-control" id="entrada" name="entrada" Placeholder="Hora de entrada" required>
+                                <input type="time" class="form-control" id="entrada" name="entrada" required>
                               </div>
                               <div class="form-group col-md-6">   
                                 <label for="salida" class="font-weight-bold">Hora de salida: <font color="red">*</font></label>
-                                <input type="time" class="form-control" id="salida" name="salida" Placeholder="Hora de salida" required>
+                                <input type="time" class="form-control" id="salida" name="salida" required>
                               </div>
                               <div class="form-group col-md-6">   
                                 <label for="plazas" class="font-weight-bold">Número de plazas: <font color="red">*</font></label>
-                                <input type="number"  class="form-control" id="NumPlazas" name="NumPlazas" Placeholder="Numero de plazas" required>
+                                <input type="number"  class="form-control" id="NumPlazas" name="NumPlazas" required>
                               </div>
                               <div class="form-group col-md-6">   
                                 <label for="vigencia" class="font-weight-bold">Vigencia de la vacante: <font color="red">*</font></label>
-                                <input type="date" class="form-control" id="VigenciaVacante" name="VigenciaVacante" Placeholder="Vigencia de la vacante" required>
+                                <input type="date" class="form-control" id="VigenciaVacante" name="VigenciaVacante" required>
                               </div>
                                 <hr/>
                               <div class="form-group col-md-12">
-                                  <button type="button" class="btn btn-primary btn-centered btnNext">Siguiente >></button>
+                                  <button type="button" class="btn btn-light btnNext">Siguiente >></button>
                               </div>
                             </div>
                           </div>
                           <div id="requisitos" class="container tab-pane"><br>
-                            <div class="form-row" align="center">
+                            <div class="form-row">
                               <div class="form-group col-md-12"> 
                                 <h4 class="font-weight-bold">Requisitos de la Vacante</h4>
                                 <hr/>
@@ -726,10 +605,10 @@
                               </div>
                               <div class="form-group col-md-6">   
                                 <label for="MenDiscapacidad" class="font-weight-bold">Mencione que discapacidad <font color="red">*</font></label>
-                                <input type="text"  class="form-control" id="MenDiscapacidad" name="MenDiscapacidad" Placeholder="Mencione que discapacidad" required>
+                                <input type="text"  class="form-control" id="MenDiscapacidad" name="MenDiscapacidad" required>
                               </div>
                               <div class="form-group col-md-6">
-                                <label for="AdultoMayor" class="font-weight-bold">¿Acepta adultos mayores de 60 años? <font color="red">*</font></label><br>
+                                <label for="AdultoMayor" class="font-weight-bold">¿Acepta adultos mayores de 55 años? <font color="red">*</font></label><br>
                                 <div class="form-check form-check-inline">
                                   <input class="form-check-input" type="radio" name="AdultoMayor" required value="Si" checked>
                                   <label class="form-check-label" for="AdultoMayor">Si</label>
@@ -741,15 +620,15 @@
                               </div>
                               <div class="form-group col-md-6">
                                 <label for="CausaVacante" class="font-weight-bold">Causa que origina la vacante <font color="red">*</font></label>
-                                <input type="text"  class="form-control" id="CausaVacante" name="CausaVacante" Placeholder="Causa que origina la vacante" required>
+                                <input type="text"  class="form-control" id="CausaVacante" name="CausaVacante" required>
                               </div>
                               <div class="form-group col-md-6">
                                 <label for="escolaridad" class="font-weight-bold">Escolaridad: <font color="red">*</font></label>
-                                <input type="text"  class="form-control" id="escolaridad" name="escolaridad" Placeholder="Escolaridad" required>
+                                <input type="text"  class="form-control" id="escolaridad" name="escolaridad" required>
                               </div>
                               <div class="form-group col-md-6">
                                 <label for="CarreraEspe" class="font-weight-bold">Carrera o Especialidad: <font color="red">*</font></label>
-                                <input type="text"  class="form-control" id="CarreraEspe" name="CarreraEspe" Placeholder="Carrera o Especialidad" required>
+                                <input type="text"  class="form-control" id="CarreraEspe" name="CarreraEspe" required>
                               </div> 
                               <div class="form-group col-md-6">
                                 <label for="idioma" class="font-weight-bold">Situación Académica: <font color="red">*</font></label>
@@ -760,6 +639,7 @@
                                   <option value="Trunca">Trunca</option>
                                   <option value="Pasante">Pasante</option>
                                   <option value="Titulado">Titulado</option>
+                                  <option value="Ninguna">Ninguna</option>
                                 </select>
                               </div>
                               <div class="form-group col-md-6">
@@ -787,7 +667,7 @@
                               </div> 
                               <div class="form-group col-md-6">
                                 <label for="idioma" class="font-weight-bold">Idioma Requerido: <font color="red">*</font></label>
-                                <input type="text"  class="form-control" id="idioma" name="idioma" Placeholder="Idioma Requerido" required>
+                                <input type="text"  class="form-control" id="idioma" name="idioma" required>
                               </div> 
                               <div class="form-group col-md-6">
                                 <label for="computacion" class="font-weight-bold">¿Requiere conocimientos en computación? <font color="red">*</font></label><br>
@@ -839,73 +719,73 @@
                               </div>
                               <div class="form-group col-md-12">
                                 <label for="prestaciones" class="font-weight-bold">Otras prestaciones: </label><br>
-                                <input type="text" class="form-control" name="prestaciones" placeholder="Otras prestaciones">
+                                <input type="text" class="form-control" name="prestaciones">
                               </div>
                               <div class="form-group col-md-12">
                                 <label for="observaciones" class="font-weight-bold">Observaciones:</label><br>
-                                <input type="text" class="form-control" name="observaciones" placeholder="Observaciones">
+                                <input type="text" class="form-control" name="observaciones">
                               </div>
                                 <hr/>
                               <div class="form-group col-md-12">
-                                <button type="button" class="btn btn-primary btn-centered btnPrevious"><< Anterior</button>
-                                <button type="button" class="btn btn-primary btn-centered btnNext">Siguiente >></button>
+                                <button type="button" class="btn btn-light btnPrevious"><< Anterior</button>
+                                <button type="button" class="btn btn-light btnNext">Siguiente >></button>
                               </div>
                             </div>
                           </div>
                           <div id="infocontacto" class="container tab-pane"><br>
-                            <div class="form-row" align="center">
+                            <div class="form-row">
                               <div class="form-group col-md-12"> 
                                 <h4 class="font-weight-bold">Información de Contacto</h4>
                                 <hr/>
                               </div>
                               <div class="form-group col-md-6">   
                                 <label for="nameC" class="font-weight-bold">Nombre: <font color="red">*</font></label>
-                                <input type="text"  class="form-control" id="nameC" name="nameC" Placeholder="Nombre" required>
+                                <input type="text"  class="form-control" id="nameC" name="nameC" required>
                               </div>
                               <div class="form-group col-md-6">   
                                 <label for="Cargo" class="font-weight-bold">Cargo: <font color="red">*</font></label>
-                                <input type="text"  class="form-control" id="Cargo" name="Cargo" Placeholder="Cargo" required>
+                                <input type="text"  class="form-control" id="Cargo" name="Cargo" required>
                               </div>
                               <div class="form-group col-md-6">   
                                 <label for="tel" class="font-weight-bold">Teléfono: <font color="red">*</font></label>
-                                <input type="text"  class="form-control" id="tel" name="tel" Placeholder="Teléfono" required>
+                                <input type="text"  class="form-control" id="tel" name="tel" required>
                               </div>
                               <div class="form-group col-md-6">   
                                 <label for="email" class="font-weight-bold">Correo Electrónico: <font color="red">*</font></label>
-                                <input type="email"  class="form-control" id="email" name="email" Placeholder="Correo electrónico" required>
+                                <input type="email"  class="form-control" id="email" name="email" required>
                               </div>
                               <div class="form-group col-md-6">   
                                 <label for="contacto" class="font-weight-bold">Medio Preferente contacto: <font color="red">*</font></label>
-                                <input type="text"  class="form-control" id="contacto" name="contacto" Placeholder="Medio preferente de contacto" required>
+                                <input type="text"  class="form-control" id="contacto" name="contacto" required>
                               </div>
                               <div class="form-group col-md-6">   
                                 <label for="DiaEntrevista" class="font-weight-bold">Días de entrevista: <font color="red">*</font></label>
-                                <input type="text"  class="form-control" id="" name="DiaEntrevista" Placeholder="Días de entrevista" required> 
+                                <input type="text"  class="form-control" id="" name="DiaEntrevista"> 
                               </div>
                               <div class="form-group col-md-12">
-                                <label for="rango" class="font-weight-bold">Horario de Entrevista: <font color="red">*</font></label><br>
+                                <label for="rango" class="font-weight-bold">Horario de Entrevista: </label><br>
                                 <div class="form-check form-check-inline">
                                   <p>De</p>
                                 </div>
                                 <div class="form-check form-check-inline col-md-5">
-                                  <input type="time"  class="form-control" id="horaentrevista" name="HorarioInicial" Placeholder="Horario de entrevista" required>
+                                  <input type="time"  class="form-control" id="horaentrevistaI" name="HorarioInicial">
                                 </div>
                                 <div class="form-check form-check-inline">
                                   <p>A</p>
                                 </div>
                                 <div class="form-check form-check-inline col-md-5">
-                                <input type="time"  class="form-control" id="horaentrevista" name="HorarioFinal" Placeholder="Horario de entrevista" required>
+                                <input type="time"  class="form-control" id="horaentrevistaF" name="HorarioFinal">
                                 </div>
                               </div>
                                 <hr/>
                               <div class="form-group col-md-12">
-                                <button type="button" class="btn btn-primary btn-centered btnPrevious"><< Anterior</button>
-                                <button type="button" class="btn btn-primary btn-centered btnNext">Siguiente >></button>
+                                <button type="button" class="btn btn-light btnPrevious"><< Anterior</button>
+                                <button type="button" class="btn btn-light btnNext">Siguiente >></button>
                               </div>
                             </div>
                           </div>
                           <div id="fechayp" class="container tab-pane"><br>
-                            <div class="form-row" align="center">
+                            <div class="form-row">
                               <div class="form-group col-md-12"> 
                                 <h4 class="font-weight-bold">Publicación</h4>
                                 <hr/>
@@ -956,7 +836,7 @@
                               </div>
                               <hr/>
                               <div class="form-group col-md-12">
-                                <button type="button" class="btn btn-primary btn-centered btnPrevious"><< Anterior</button>
+                                <button type="button" class="btn btn-light btnPrevious"><< Anterior</button>
                               </div>
                             </div>
                           </div>
@@ -977,46 +857,45 @@
       </div>
     </div>
   </section>
-  <!--footer--> 
-  <footer>
-    <div class="container-fluid bg-dark text-light">
-      <div class="container">
-        <div class="row py-5 justify-content-center">
-          <div class="col-4 col-md-1">
-            <img src="{{asset('assets/img/lerma-footer.png')}}" alt="" class="img-fluid">
-          </div>
-          <div class="col-10 col-md-4">
-            <h5 class="text-uppercase pb-1">Contactanos</h5>
-            <i class="fas fa-phone fa-xs fa-footer pr-3"></i><a href="tel:+52 728 2829903" class="text-light">+52 (728) 2829903</a><br>
-            <i class="far fa-envelope fa-xs fa-footer pr-3"></i><a href="mailto:empleolerma@gmail.com" class="text-light">empleolerma@gmail.com</a><br>
-            <i class="fas fa-map-marker-alt fa-xs fa-footer pr-3"></i><a href="#" class="text-light">Palacio Municipal s/n Col. Centro, Lerma, Estado de México</a>
-          </div>
-          <div class="col-10 col-md-3">
-            <h5 class="text-uppercase pb-1">Síguenos</h5>
-            <i class="fab fa-facebook fa-xs fa-footer pr-3"></i><a href="#" class="text-light">Facebook</a><br>
-            <i class="fab fa-instagram-square fa-xs fa-footer pr-3"></i><a href="#" class="text-light">Instagram</a><br>
-            <i class="fab fa-youtube fa-xs fa-footer pr-3"></i><a href="#" class="text-light">YouTube</a><br>
-          </div>
-          <div class="col-10 col-md-4">
-            <h5 class="text-uppercase pb-1">Enlaces de interes</h5>
-            <a href="https://www.lerma.gob.mx/" class="text-light">Ayuntamiento de Lerma</a><br>
-            <a href="https://strabajo.edomex.gob.mx" class="text-light">Secretaría del Trabajo del Estado de México</a><br>
-            <a href="https://www.gob.mx/stps" class="text-light">Secretaría del Trabajo y Previsión Social</a><br>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container-fluid bg-secondary">
-      <div class="container">
-        <div class="row py-3 justify-content-md-center text-center">
-          <div class="col-12 col-md-8 copy">
-            <a href="#" class="text-white small text-uppercase pr-4">Derechos reservados 2019</a>
-            <a href="http://www.lerma.gob.mx/ayuntamiento/aviso-de-privacidad/" class="text-white small text-uppercase pr-4">Anuncio de privacidad</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <script src="https://kit.fontawesome.com/b2d5760d1d.js" crossorigin="anonymous"></script>  
-</body>
-</html>
+@endsection
+
+@section('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/b2d5760d1d.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      $(document).ready(function (){ 
+        $('.btnNext').click(function(){
+          $('.siguiente .active').parent().next('li').find('a').trigger('click');
+        });
+
+        $('.btnPrevious').click(function() {
+          $('.siguiente .active').parent().prev('li').find('a').trigger('click');
+        });
+
+        $('#entfed').change(function() {
+          var EntFed = $(this).val();
+          $.ajax({
+            url: 'getMpios',
+            type: 'GET',
+            data: {EntFed:EntFed},
+            headers: {
+                      'X-CSRF-Token': '{{ csrf_token() }}',
+                      },
+            success:function(response){
+              var datos = JSON.parse(response);
+              var len = response.length;
+              $("#municipio").empty();
+              for( var i = 0; i<len; i++){
+                  // var IdMunicipio = datos[i]['IdMunicipio'];
+                  var Municipio = datos[i]['Municipio'];
+                  $("#municipio").append("<option value='"+Municipio+"'>"+Municipio+"</option>");
+              }
+            }
+          });
+        });
+      });
+    </script>
+
+@endsection

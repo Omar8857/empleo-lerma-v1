@@ -1,10 +1,9 @@
-@extends('layouts.app')
-
+@extends('layouts.register')
 @section('content')
 <body class="gradient-brand">
     <div class="container">
       <div class="row justify-content-md-center align-items-center vh-100">
-        <div class="col-12 col-md-5 bg-white shadow p-5">
+        <div class="col-12 col-md-5 bg-white shadow p-4">
           <div class="brand text-center mb-2">
             <a href="{{url('/')}}">
               <img src="{{asset('assets/img/logos-lerma.png')}}" alt="lerma">
@@ -13,7 +12,7 @@
           <form method="POST" action="{{ route('register') }}" class="data-form">
           @csrf
             <div class="form-group">
-              <label for="typeUser" class="font-weight-bold">{{ __('Eres') }}</label>
+              <label for="typeUser" class="font-weight-bold">{{ __('Soy') }}</label>
               <select name="tipo_user" class="form-control" required>
                 <option value="user">Ciudadano</option>
                 <option value="company">Empresa</option>
@@ -62,7 +61,7 @@
             </div>
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="keepConnected" onclick="registrar.disabled = !this.checked">
-              <label class="form-check-label" for="keepConnected">He leído y acepto la <a style="color:blue;" href="http://" target="_blank">política de privacidad</a>.</label>
+              <label class="form-check-label" for="keepConnected">He leído y acepto la <a style="text-decoration-line: underline;" href="https://lerma.gob.mx/ayuntamiento/aviso-de-privacidad/" target="_blank">política de privacidad</a>.</label>
             </div>
             <button type="submit" name="registrar" class="btn btn-primary" disabled>Registrarme</button>
         </form>

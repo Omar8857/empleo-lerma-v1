@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.register')
 
 @section('content')
   <body class="gradient-brand">

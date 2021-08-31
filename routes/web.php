@@ -15,12 +15,15 @@
 use App\DatosEmpresa;
 use App\RequisitosVacante;
 use App\InformacionContacto;
+use App\Vacante;
 use App\Fecha;
 
+// landing
 Route::get('/', function () {
     if(Auth()->guest())
     {
         $empresas = DatosEmpresa::orderBy('id_empresa','DESC')->limit('12')->get();
+        $municipios = Vacante::select('lugar_vacante')->distinct()->get();
         $vacantes = \DB::SELECT("SELECT * FROM vacantes 
                                 INNER JOIN datos_empresas ON vacantes.id_empresa = datos_empresas.id_empresa 
                                 INNER JOIN fechas ON vacantes.id_vacante = fechas.id_vacante
@@ -29,7 +32,7 @@ Route::get('/', function () {
         $info = InformacionContacto::All();
         $fechas = Fecha::All();
         
-        return view('welcome', compact('empresas','vacantes','requisitos','info','fechas'));
+        return view('welcome', compact('empresas', 'municipios', 'vacantes','requisitos','info','fechas'));
         //return view('welcome');
     }
     else
@@ -38,16 +41,23 @@ Route::get('/', function () {
     }
 });
 
+Route::get('/busco_empleo', function () {
+    return view('buscoempleo');
+});
+
+Route::get('/ofrezco_empleo', function () {
+    return view('ofrezcoempleo');
+});
+
 Auth::routes();
 
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
-
 Route::get('/getMpios','HomeController@getMpios')->name('getMpios');
 
 // Rutas para Mi Cuenta
-Route::get('/micuenta', 'HomeController@micuenta')->name('micuenta');
+Route::get('/micuenta', 'HomeController@micuenta')->name('micuenta')->middleware('verified');
 
 // Rutas PDF
 Route::get('/cvpdf', 'HomeController@exportarpdf')->middleware('auth');

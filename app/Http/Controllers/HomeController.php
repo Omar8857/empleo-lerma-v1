@@ -20,7 +20,7 @@ use App\idioma;
 use App\usercv;
 use App\User;
 use App\DatosEmpresa;
-use App\vacante;
+use App\Vacante;
 use App\RequisitosVacante;
 use App\InformacionContacto;
 use App\Fecha;
@@ -52,6 +52,7 @@ class HomeController extends Controller
     public function index()
     {
         $empresas   = DatosEmpresa::orderBy('id_empresa','DESC')->limit('12')->get();
+        $municipios = Vacante::select('lugar_vacante')->distinct()->get();
         $vacantes   = \DB::SELECT("SELECT * FROM vacantes 
                                 INNER JOIN datos_empresas ON vacantes.id_empresa = datos_empresas.id_empresa 
                                 INNER JOIN fechas ON vacantes.id_vacante = fechas.id_vacante
@@ -66,7 +67,7 @@ class HomeController extends Controller
                                 ->limit('7')
                                 ->get();
         
-        return view('home', compact('empresas','vacantes','requisitos','info','fechas','recientes'));
+        return view('home', compact('empresas','municipios','vacantes','requisitos','info','fechas','recientes'));
     }
 
     // Mi cuenta 
