@@ -15,7 +15,7 @@
 use App\DatosEmpresa;
 use App\RequisitosVacante;
 use App\InformacionContacto;
-use App\Vacante;
+use App\vacante;
 use App\Fecha;
 
 // landing
@@ -23,7 +23,7 @@ Route::get('/', function () {
     if(Auth()->guest())
     {
         $empresas = DatosEmpresa::orderBy('id_empresa','DESC')->limit('12')->get();
-        $municipios = Vacante::select('lugar_vacante')->distinct()->get();
+        $municipios = vacante::select('lugar_vacante')->distinct()->get();
         $vacantes = \DB::SELECT("SELECT * FROM vacantes 
                                 INNER JOIN datos_empresas ON vacantes.id_empresa = datos_empresas.id_empresa 
                                 INNER JOIN fechas ON vacantes.id_vacante = fechas.id_vacante

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
   
-class Vacante extends Model
+class vacante extends Model
 {
     protected $primarykey = 'id_vacante';
     protected $titulo_puesto;
