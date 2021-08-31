@@ -15,7 +15,11 @@
         <img src="{{asset('assets/img/bg.jpg')}}" class="d-block w-100" alt="...">
         <div class="row justify-content-md-center">
           <div class="col-12 col-md-8 text-white text-center description">
-
+            <h3 class="font-weight-bolder">Portal de Empleo Lerma </h3>
+						<p class="font-weight-light">
+							Permite la publicación, promoción y vinculación de empleos promovidos por el gobierno local 
+							para contribuir a la disminución de tasas de desempleo en el municipio de Lerma.	
+						</p>
           </div>
         </div>
       </figure>
@@ -123,7 +127,7 @@
               @foreach($vacantes as $vacante)
                 <a href="{{ route('vacante', $vacante->slug) }}" class="media mb-4">
                   <div style="height: 100px; width: 100px; 
-                          background: url('{{asset('archivo/'.$empresa->foto_perfil)}}') no-repeat center center; 
+                          background: url('{{asset('archivo/'.$empleo->foto_perfil)}}') no-repeat center center; 
                           -webkit-background-size: contain;
                           -moz-background-size: contain;
                           -o-background-size: contain;
