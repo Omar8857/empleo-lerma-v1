@@ -127,7 +127,7 @@
               @foreach($vacantes as $vacante)
                 <a href="{{ route('vacante', $vacante->slug) }}" class="media mb-4">
                   <div style="height: 100px; width: 100px; 
-                          background: url('{{asset('archivo/'.$empleo->foto_perfil)}}') no-repeat center center; 
+                          background: url('{{asset('archivo/'.$vacante->foto_perfil)}}') no-repeat center center; 
                           -webkit-background-size: contain;
                           -moz-background-size: contain;
                           -o-background-size: contain;

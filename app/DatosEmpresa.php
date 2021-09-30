@@ -24,5 +24,5 @@ class DatosEmpresa extends Model
     protected $ComoSeEnt;
     protected $foto_perfil;
     protected $id;
-    protected $table= "datos_empresas";
+    protected $table = "datos_empresas";
 }

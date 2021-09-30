@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-  
+
 class vacante extends Model
 {
     protected $primarykey = 'id_vacante';
@@ -12,7 +12,7 @@ class vacante extends Model
     protected $descripcion_breve;
     protected $FunActi_realizar;
     protected $conocimientos_requeridos;
-    protected $habilidades_requeridos;
+    //protected $habilidades_requeridos;
     protected $direccioncompleta;
     protected $lugar_vacante;
     protected $tipo_empleo;
@@ -23,18 +23,18 @@ class vacante extends Model
     protected $numero_plazas;
     protected $vigencia_vacante;
     protected $id_empresa;
-    protected $table= "vacantes";
+    protected $table = "vacantes";
 
-    public function scopeTitulo($query, $titulo){
-        if ($titulo) 
-             return $query->where('titulo_puesto', 'LIKE', "%$titulo%");
- 
-     }
- 
-     public function scopeLugar($query, $lugar){
-         if ($lugar) 
-             return $query->where('lugar_vacante', 'LIKE', "%$lugar%")
-                          ->orWhere('direccioncompleta','LIKE',"%$lugar%"); 
- 
-      }
+    public function scopeTitulo($query, $titulo)
+    {
+        if ($titulo)
+            return $query->where('titulo_puesto', 'LIKE', "%$titulo%");
+    }
+
+    public function scopeLugar($query, $lugar)
+    {
+        if ($lugar)
+            return $query->where('lugar_vacante', 'LIKE', "%$lugar%")
+                ->orWhere('direccioncompleta', 'LIKE', "%$lugar%");
+    }
 }

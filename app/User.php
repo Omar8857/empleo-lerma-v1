@@ -39,26 +39,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-   /* public function scopeVacante($query, $vacante){
-       if ($vacante) 
-            return $query->where('vacante', 'LIKE', "%vacante%");
-
-    }
-
-    public function scopeMunicipio($query, $municipio){
-        if ($municipio) 
-            return $query->where('municipio', 'LIKE', "%municipio%");
-
-     }*/
-    
-     /**
+    /**
      * Send the email verification notification.
      *
      * @return void
      */
     public function sendEmailVerificationNotification()
     {
-        $this->notify(new Notifications\VerifyEmail);
+        $this->notify(new VerifyEmail);
     }
 
     /**

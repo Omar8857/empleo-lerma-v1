@@ -37,6 +37,7 @@ class ContactoMail extends Mailable
      */
     public function build()
     {
-        return $this->view('email/EmailContacto');
+        return $this->from('contacto@lerma.gob.mx', 'Empleo Lerma')
+                    ->view('email/EmailContacto');
     }
 }  

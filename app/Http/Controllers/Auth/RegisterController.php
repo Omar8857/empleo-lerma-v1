@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use App\Notifications\NewCompany;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -63,13 +65,24 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
-        return User::create([
+    {   
+        //create user
+        $user = User::create([
             'nombre' => $data['name'],
             'email' => $data['email'],
             'telefono' => $data['telefono'],
             'tipo_user' => $data['tipo_user'],
             'password' => Hash::make($data['password']),
         ]);
+        
+        //send notification if user is company
+        if($data['tipo_user']=='company'){
+            //get admins
+            $admins = User::where('tipo_user','admin')->get();
+            //send notification
+            Notification::send($admins, new NewCompany($user));
+        }
+        
+        return $user;
     }
 }

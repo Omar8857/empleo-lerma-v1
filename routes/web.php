@@ -18,7 +18,10 @@ use App\InformacionContacto;
 use App\vacante;
 use App\Fecha;
 
-// landing
+/**
+ * Landing
+ */
+
 Route::get('/', function () {
     if(Auth()->guest())
     {
@@ -49,53 +52,55 @@ Route::get('/ofrezco_empleo', function () {
     return view('ofrezcoempleo');
 });
 
-Auth::routes();
+//Busqueda
+Route::get('/search', 'VacantesController@index')->name('buscar'); 
 
+/**
+ * Auth
+ */
+Auth::routes();
 Auth::routes(['verify' => true]);
 
+//home
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 Route::get('/getMpios','HomeController@getMpios')->name('getMpios');
-
-// Rutas para Mi Cuenta
 Route::get('/micuenta', 'HomeController@micuenta')->name('micuenta')->middleware('verified');
 
 // Rutas PDF
 Route::get('/cvpdf', 'HomeController@exportarpdf')->middleware('auth');
 Route::get('/cvuserpdf/{nombre_completo}', 'VacantesController@cvuserpdf')->name('cvuserpdf')->middleware('auth');
 
-//Ruta para guardar curriculum de usuario
-Route::POST('/curriculum', 'HomeController@curriculum')->name('curriculum');
-Route::POST('/guardarcurriculum', 'HomeController@guardarcurriculum')->name('guardarcurriculum');
-Route::POST('/actualizarcurriculum', 'HomeController@actualizarcurriculum')->name('actualizarcurriculum');
-Route::POST('/archivocv', 'HomeController@archivocv')->name('archivocv');
-Route::POST('/archivocvact', 'HomeController@archivocvact')->name('archivocvact');
+// Curriculum
+Route::POST('/curriculum', 'HomeController@curriculum')->name('curriculum')->middleware('auth');
+Route::POST('/guardarcurriculum', 'HomeController@guardarcurriculum')->name('guardarcurriculum')->middleware('auth');
+Route::POST('/actualizarcurriculum', 'HomeController@actualizarcurriculum')->name('actualizarcurriculum')->middleware('auth');
+Route::POST('/archivocv', 'HomeController@archivocv')->name('archivocv')->middleware('auth');
+Route::POST('/archivocvact', 'HomeController@archivocvact')->name('archivocvact')->middleware('auth');
 
-Route::POST('/guardardatosc', 'HomeController@guardardatosc')->name('guardardatosc');
-Route::POST('/actualizardatosc', 'HomeController@actualizardatosc')->name('actualizardatosc');
+// Ciudadano
+Route::POST('/guardardatosc', 'HomeController@guardardatosc')->name('guardardatosc')->middleware('auth');
+Route::POST('/actualizardatosc', 'HomeController@actualizardatosc')->name('actualizardatosc')->middleware('auth');
 
-//Vacantes
+// Empresa
+Route::POST('/guardardatosemp', 'HomeController@guardardatosemp')->name('guardardatosemp')->middleware('auth');
+Route::POST('/modificardatosemp', 'HomeController@modificardatosemp')->name('modificardatosemp')->middleware('auth');
+Route::get('modificarestadoemp', 'HomeController@modificarestadoemp')->name('modificarestadoemp')->middleware('auth');
+
+// Vacantes
 Route::get('vacante/{slug}', 'VacantesController@show')->name('vacante');
+Route::POST('/guardarvacante', 'VacantesController@create')->name('guardarvacante')->middleware('auth');
+Route::get('vacante/{id}/editar', 'VacantesController@edit')->name('editarvacante')->middleware('auth');
+Route::POST('vacante/{id}/actualizar', 'VacantesController@update')->name('actualizarvacante')->middleware('auth');
 
-//Busqueda
-Route::get('/search', 'VacantesController@index')->name('buscar'); 
+// Postulacion
+Route::POST('/postulacion', 'VacantesController@postulacion')->name('postulacion')->middleware('auth');
 
-//Guardar datos empresa
-Route::POST('/guardardatosemp', 'HomeController@guardardatosemp')->name('guardardatosemp');
+// Email
+Route::get('/email_contacto/{email}', 'VacantesController@contactar')->name('correo')->middleware('auth');
+Route::POST('/contacto','MailController@store')->name('contacto');
 
-//Modificar datos empresa
-Route::POST('/modificardatosemp', 'HomeController@modificardatosemp')->name('modificardatosemp');
-
-//Ruta para postulacion
-Route::POST('/postulacion', 'VacantesController@postulacion')->name('postulacion');
-
-//Ruta para guardar vacante
-Route::POST('/guardarvacante', 'VacantesController@create')->name('guardarvacante');
-
+// Offline
 Route::get('/offline', function () {    
     return view('vendor/laravelpwa/offline');
 });
 
-//Email
-Route::get('/email_contacto/{email}', 'VacantesController@contactar')->name('correo')->middleware('auth');
-
-Route::POST('/contacto','MailController@store')->name('contacto');

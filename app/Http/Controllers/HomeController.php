@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use App\curriculumusers;
 use App\EntidadFed;
 use App\EdoCivil;
@@ -24,6 +25,7 @@ use App\vacante;
 use App\RequisitosVacante;
 use App\InformacionContacto;
 use App\Fecha;
+use App\Notifications\ActiveAccount;
 use App\Postulacion;
 use App\reciente;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -662,6 +664,26 @@ class HomeController extends Controller
         \DB::UPDATE("UPDATE users SET nombre='$nombre_RS', telefono='$tel1', email='$emailc' WHERE id='$id'");
 
         return redirect()->route('micuenta');
+    }
+
+    public function modificarestadoemp(Request $req){
+        
+        $empresa = DatosEmpresa::where('id_empresa', $req->emp_id)->first();
+        //change status
+        if($empresa->is_active){
+            $empresa->is_active = 0;
+        }else{
+            $empresa->is_active = 1;
+        }
+        $empresa->save();
+        //send notification to company
+        if($empresa->is_active){
+            $user = User::find($empresa->id);
+            Notification::send($user, new ActiveAccount($empresa));
+        }
+        return response()->json(['success'=>'Se ha modificado satisfactoriamente', 
+                                 'name'=>$empresa->nombre_RS,
+                                 'is_active'=>$empresa->is_active]);
     }
 
     //Modifica los datos de empresa

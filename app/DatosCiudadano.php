@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DatosCiudadano extends Model 
+class DatosCiudadano extends Model
 {
-    protected $primarykey ='id_persona';
+    protected $primarykey = 'id_persona';
     protected $nombre_completo;
     protected $telefono;
     protected $fecha_nacimiento;
@@ -24,5 +24,5 @@ class DatosCiudadano extends Model
     protected $ComSeEnt;
     protected $foto_perfil;
     protected $id;
-    protected $table="DatosCiudadano";
+    protected $table = "DatosCiudadano";
 }
