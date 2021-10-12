@@ -36,42 +36,46 @@
     </div>
     <div class="social-icons">
       <div class="container">
-        @auth
-        <div class="float-left btn"><i class="fas fa-user fa-sm pr-1"></i> {{ Auth::user()->nombre }}</div>
-        @endauth
-        <ul>
-          @guest
-          <li>
-            <a href="{{ route('login') }}" class="btn"> Iniciar Sesión </a>
-          </li>
-          @if (Route::has('register'))
-          <li>
-            <a href="{{ route('register') }}" class="btn"> Registrarse </a>
-          </li>
-          @endif
-          @else
-          <li>
-            <a href="{{ route('micuenta') }}" class="btn">{{ __('Mi Cuenta') }}</a>
-          </li>
-          <li><a class="btn" href="{{ route('logout') }}" onclick="event.preventDefault();
+        <nav class="navbar navbar-expand-md navbar-light p-0">
+          <div class="btn"><i class="fas fa-user fa-sm pr-1"></i>@auth {{ Auth::user()->nombre }}@endauth</div>          
+          <button style="border-color:white;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerAccount" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-ellipsis-h"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerAccount">
+            <ul class="ml-auto p-0">
+              @guest
+              <li>
+                <a href="{{ route('login') }}" class="btn"> Iniciar Sesión </a>
+              </li>
+              @if (Route::has('register'))
+              <li>
+                <a href="{{ route('register') }}" class="btn"> Registrarse </a>
+              </li>
+              @endif
+              @else
+              <li>
+                <a href="{{ route('micuenta') }}" class="btn">{{ __('Mi Cuenta') }}</a>
+              </li>
+              <li><a class="btn" href="{{ route('logout') }}" onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">
-              {{ __('Cerrar Sesión') }}
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              @csrf
-            </form>
-          </li>
-          @endguest
-          <li class="facebook">
-            <a href="https://www.facebook.com/Ayuntamiento-de-Lerma-467953823268730" class="s-i" target="_blank"></a>
-          </li>
-          <li class="youtube">
-            <a href="https://www.youtube.com/channel/UC8IK9ozLAiYcvIftlzb1NWw" class="s-i" target="_blank"></a>
-          </li>
-        </ul>
+                  {{ __('Cerrar Sesión') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+                </form>
+              </li>
+              @endguest
+              <li class="facebook">
+                <a href="https://www.facebook.com/Ayuntamiento-de-Lerma-467953823268730" class="s-i" target="_blank"></a>
+              </li>
+              <li class="youtube">
+                <a href="https://www.youtube.com/channel/UC8IK9ozLAiYcvIftlzb1NWw" class="s-i" target="_blank"></a>
+              </li>
+          </div>
+        </nav>
       </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-dark gradient-brand">
+    <nav class="navbar navbar-expand-md navbar-dark gradient-brand">
       <div class="container">
         <button class="navbar-toggler ri" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Menu">
           <span class="navbar-toggler-icon"></span>

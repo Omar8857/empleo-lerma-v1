@@ -5,14 +5,17 @@
 <section>
   <div class="container my-md-5">
     <figure class="bg-about">
-      <img src="{{asset('assets/img/bg.jpg')}}" class="d-block w-100" alt="...">
+      <img src="{{asset('assets/img/color.jpg')}}" class="d-block w-100" alt="...">
       <div class="row justify-content-md-center">
         <div class="col-12 col-md-8 text-white text-center description">
           <h3 class="font-weight-bolder">Portal de Empleo Lerma </h3>
-          <p class="font-weight-light">
+          <p class="font-weight-light d-lg-none">
+            Publicación, promoción y vinculación de empleos.
+          </p>    
+          <p class="font-weight-light d-none d-lg-block">
             Permite la publicación, promoción y vinculación de empleos promovidos por el gobierno local
             para contribuir a la disminución de tasas de desempleo en el municipio de Lerma.
-          </p>
+          </p>    
         </div>
       </div>
     </figure>
@@ -65,6 +68,7 @@
       <div class="col-12 col-md-4 text-center p-4">
         <h3 class="lerma px-4">Empresas con vacantes para ti</h3>
         <p>Estas son algunas empresas que tienen vacantes disponibles para ti</p>
+        <p class="lead bg-info text-white shadow p-2"> Hay <u>{{$no_vacantes}}</u> ofertas actuales</p>
       </div>
       <div class="col-12 col-md-8 p-4">
         <div class="card-columns">
@@ -86,13 +90,13 @@
 <!--Vacancies-->
 <section class="events my-5">
   <div class="container">
-    <div class="row justify-content-between">
+    <div class="row justify-content-center">
       <div class="col-12 text-center mb-4">
         <h3 class="lerma mb-5">Vacantes Recientes</h3>
       </div>
-      <!-- filters-->
+      <!-- filters
       <div class="col-12 col-md-4">
-        <!-- <div class="mb-4">
+        <div class="mb-4">
             <div class="list-group">
 							<li class="list-group-item bg-info text-white">
 									<h5 class="text-center">Búsquedas Recientes</h5>
@@ -101,7 +105,7 @@
 							<a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
 							<a href="#" class="list-group-item list-group-item-action bg-light">Morbi leo risus</a>
             </div>
-        	</div> -->
+        </div>
         <div class="mb-4">
           <div class="list-group">
             <li class="list-group-item bg-info text-white">
@@ -112,7 +116,7 @@
             <a href="#" class="list-group-item list-group-item-action bg-light">Nocturno</a>
           </div>
         </div>
-      </div>
+      </div>-->
       <!-- vacancies-->
       <div class="col-12 col-md-8">
         <div class="card-content">

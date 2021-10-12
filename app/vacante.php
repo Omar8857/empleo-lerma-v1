@@ -23,6 +23,8 @@ class vacante extends Model
     protected $numero_plazas;
     protected $vigencia_vacante;
     protected $id_empresa;
+    protected $is_covered;
+    protected $covered_on_platform;
     protected $table = "vacantes";
 
     public function scopeTitulo($query, $titulo)

@@ -34,8 +34,9 @@ Route::get('/', function () {
         $requisitos = RequisitosVacante::All();
         $info = InformacionContacto::All();
         $fechas = Fecha::All();
+        $no_vacantes = \DB::table('vacantes')->where('is_covered', 0 )->count();
         
-        return view('welcome', compact('empresas', 'municipios', 'vacantes','requisitos','info','fechas'));
+        return view('welcome', compact('empresas', 'municipios', 'vacantes','requisitos','info','fechas', 'no_vacantes'));
         //return view('welcome');
     }
     else
@@ -91,6 +92,7 @@ Route::get('vacante/{slug}', 'VacantesController@show')->name('vacante');
 Route::POST('/guardarvacante', 'VacantesController@create')->name('guardarvacante')->middleware('auth');
 Route::get('vacante/{id}/editar', 'VacantesController@edit')->name('editarvacante')->middleware('auth');
 Route::POST('vacante/{id}/actualizar', 'VacantesController@update')->name('actualizarvacante')->middleware('auth');
+Route::get('vacante/{id}/cubierta/{platform_support}', 'VacantesController@covered')->name('vacantecubierta')->middleware('auth');
 
 // Postulacion
 Route::POST('/postulacion', 'VacantesController@postulacion')->name('postulacion')->middleware('auth');

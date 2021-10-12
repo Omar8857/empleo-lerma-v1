@@ -470,4 +470,25 @@ class VacantesController extends Controller
             ->with('correouser', $correouser)
             ->with('datosu', $datosu);
     }
+
+    public function covered($id, $platform_support){
+        
+        //vacancy data
+        $vacante = vacante::where('id_vacante', $id)->first();
+ 
+        $is_covered = 1;
+        if($platform_support=='true'){
+            $covered_on_platform = 1;
+        }else{
+            $covered_on_platform = 0;
+        }
+        //update
+        \DB::UPDATE("UPDATE vacantes 
+                     SET is_covered='$is_covered', 
+                         covered_on_platform='$covered_on_platform'
+                     WHERE id_vacante='$id'");
+
+        return response()->json(['success'=>'La vacante se ha modificado satisfactoriamente', 
+                                 'name'=>$vacante->titulo_puesto]);
+    }
 }

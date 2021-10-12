@@ -464,6 +464,7 @@ class ComposerStaticInite83cbb63fdb5efad483dabb47acb85cf
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\InformacionContacto' => __DIR__ . '/../..' . '/app/InformacionContacto.php',
         'App\\Mail\\ContactoMail' => __DIR__ . '/../..' . '/app/Mail/ContactoMail.php',
+        'App\\Mail\\VerifyMail' => __DIR__ . '/../..' . '/app/Mail/VerifyMail.php',
         'App\\Motivo' => __DIR__ . '/../..' . '/app/Motivo.php',
         'App\\Municipio' => __DIR__ . '/../..' . '/app/Municipio.php',
         'App\\Notifications\\ActiveAccount' => __DIR__ . '/../..' . '/app/Notifications/ActiveAccount.php',

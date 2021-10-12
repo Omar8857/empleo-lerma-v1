@@ -490,8 +490,9 @@
                         <small class="txt-accent"><span>{{$vacante->lugar_vacante}}</span> / <span> {{date('d-m-o h:i a', strtotime($vacante->fecha))}}</span></small>
                       </div>
                       <div class="ml-2">
-                        <a href="{{ route('vacante', $vacante->slug) }}" class="btn btn-light mt-4 btn-block btn-sm">ver</a><br />
+                        <a href="{{ route('vacante', $vacante->slug) }}" class="btn btn-light mt-4 btn-block btn-sm">ver</a>
                         <a href="{{ route('editarvacante', $vacante->id_vacante) }}" class="btn btn-light btn-block btn-sm">editar</a>
+                        <button data-id="{{$vacante->id_vacante}}" class="btn btn-light btn-block btn-sm btn-covered">vacante cubierta</button>
                       </div>
                     </div>
                     <hr>
@@ -946,6 +947,58 @@
         }
       });
     });
+
+    $('.btn-covered').click(function(e) {
+      const vacancy_id = this.getAttribute("data-id");
+      const button = this;
+      Swal.fire({
+        icon: 'question',
+        title: '¿Cubriste la vacante desde Empleo Lerma?',
+        showCloseButton: true,
+        showDenyButton: true,
+        confirmButtonText: 'Si',
+        confirmButtonColor: '#e4032b',
+        denyButtonText: 'No',
+        denyButtonColor: '#6c757d',
+        showLoaderOnConfirm: true,
+        showLoaderOnDeny: true,
+        preConfirm: (login) => {
+          return covered_vacancy(login, vacancy_id)
+        },
+        preDeny:(login) => {
+          return covered_vacancy(login, vacancy_id)
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+      }).then((result) => {
+        if (result.isConfirmed || result.isDenied) {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: result.value.name,
+            text: result.value.success,
+            showConfirmButton: false,
+            timer: 1500
+          });
+          //hide register
+          button.parentNode.parentNode.remove();
+        }
+      });
+    });
   });
+
+  function covered_vacancy(login, vacancy_id){
+    return fetch(`vacante/${vacancy_id}/cubierta/${login}`)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(response.statusText)
+              }
+              return response.json()
+            })
+            .catch(error => {
+              Swal.showValidationMessage(
+                `Request failed: ${error}`
+              )
+            })
+  }
 </script>
 @endsection

@@ -68,8 +68,9 @@ class HomeController extends Controller
                                 ->orderBy('created_at','DESC')
                                 ->limit('7')
                                 ->get();
-        
-        return view('home', compact('empresas','municipios','vacantes','requisitos','info','fechas','recientes'));
+        $no_vacantes = \DB::table('vacantes')->where('is_covered', 0 )->count();
+
+        return view('home', compact('empresas','municipios','vacantes','requisitos','info','fechas','recientes', 'no_vacantes'));
     }
 
     // Mi cuenta 
@@ -227,6 +228,7 @@ class HomeController extends Controller
                                 ->join('datos_empresas', 'datos_empresas.id_empresa', '=', 'vacantes.id_empresa')
                                 ->join('fechas', 'fechas.id_vacante', '=', 'vacantes.id_vacante')
                                 ->where('vacantes.id_empresa',$ide)
+                                ->where('vacantes.is_covered',0)
                                 ->paginate(4)
                                 ->appends(request()->query());
                     $exppuestos = ExpPuesto::All();
