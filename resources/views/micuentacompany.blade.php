@@ -179,7 +179,7 @@
                         </div>
                         <div class="form-group col-md-6">
                           <label for="phoneUser">Teléfono 2</label>
-                          <input type="number" readonly class="form-control" name="phoneUser2" placeholder="Teléfono 2" value="{{$empresa->tel2}}" required>
+                          <input type="number" readonly class="form-control" name="phoneUser2" placeholder="Teléfono 2" value="{{$empresa->tel2}}">
                         </div>
                         <div class="form-group col-md-6">
                           <label for="email">Correo Electrónico*</label>
@@ -275,11 +275,11 @@
                         </div>
                         <div class="form-group col-md-6">
                           <label for="phoneUser">Teléfono 1*</label>
-                          <input type="tel" class="form-control" id="phoneUser1" name="phoneUser1" placeholder="Teléfono 1" value="{{$empresa->tel1}}" pattern="[0-9]{10}" title="Ingrese número a 10 dígitos" required>
+                          <input type="tel" class="form-control" id="phoneUser1" name="phoneUser1" placeholder="Teléfono 1" value="{{$empresa->tel1}}" pattern="[a-z0-9]{10,18}" title="Ingrese número a 10 dígitos" required>
                         </div>
                         <div class="form-group col-md-6">
                           <label for="phoneUser">Teléfono 2</label>
-                          <input type="tel" class="form-control" id="phoneUser2" name="phoneUser2" placeholder="Teléfono 2" value="{{$empresa->tel2}}" pattern="[0-9]{10}" title="Ingrese número a 10 dígitos" required>
+                          <input type="tel" class="form-control" id="phoneUser2" name="phoneUser2" placeholder="Teléfono 2" value="{{$empresa->tel2}}" pattern="[a-z0-9]{10,18}" title="Ingrese número a 10 dígitos" required>
                         </div>
                         <div class="form-group col-md-6">
                           <label for="email">Correo Electrónico*</label>
